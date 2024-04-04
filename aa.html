@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Student Portal - GCUF</title>
+<link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon" />
+<link href="css/styles.css" rel="stylesheet" type="text/css" />
+
+<script language="javascript" type="text/javascript">
+
+function onSubmitForm(){
+	var val=document.getElementById("userName").value;
+	var val1=document.getElementById("u_password").value;
+	//alert("val = "+val);
+	if(val=="" || val1=="" || val=="Username" || val1=="u_password(*,&)"){
+		
+		document.getElementById("txtStatus").value="Please enter Username or Password....";
+		return false;
+		} 
+	return true;	
+		  
+}
+
+
+function setFocus(sid){
+	var val=document.getElementById(sid).value;
+	//alert("val = "+val);
+	if(val=="Username" || val=="u_password(*,&)"){
+		document.getElementById(sid).value="";
+		//document.getElementById("txtStatus").value="";
+		} 
+		
+		  
+}
+
+function lostFocus(sid){
+var val=document.getElementById(sid).value;
+
+	if(sid=="userName"){
+			if(val==""){
+				document.getElementById(sid).value="Username";
+			}
+	} 
+
+
+	if(sid=="u_password"){
+			if(val==""){
+				document.getElementById(sid).value="u_password(*,&)";
+			}
+	} 
+
+	
+	}
+
+</script>
+
+</head>
+
+<body style=" background:url(images/index_01.png) repeat-x #163C58 " topmargin="0" leftmargin="0" rightmargin="0" bottommargin="0">
+
+
+<center>
+  <table width="1081" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td height="250" colspan="2" align="left" >
+      <table width="96%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td colspan="3" height="124">&nbsp;</td>
+          </tr>
+        <tr>
+          <td width="190" height="396">&nbsp;</td>
+          <td width="652" style="background: url(images/index_04.png) repeat-x" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="57%" height="186">&nbsp;</td>
+              </tr>
+            <tr>
+              <td height="28">&nbsp;</td>
+              </tr>
+			   <form action="p_scripts/process.php" method="POST" name="user_form1" id="user_form1" onsubmit="onSubmitForm()">
+            <tr>
+              <td height="54" align="left"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+             
+                <tr>
+                  <td width="77" height="46">&nbsp;</td>
+                  <td width="279">
+                  <input name="userName" type="text" id="userName" class="txtField" value="Username" size="18" tabindex="1" 
+                   onfocus="setFocus(this.id);" onblur="lostFocus(this.id);"/></td>
+                  <td width="302">
+                  <input name="u_password" type="password" id="u_password"  class="txtField"  value="u_password(*,&)" size="18" tabindex="2" 
+                   onfocus="setFocus(this.id);" onblur="lostFocus(this.id);"/>
+                  </td>
+                </tr>
+              </table></td>
+              </tr>
+            <tr>
+              <td height="54"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td height="10" colspan="3"></td>
+                </tr>
+                <tr>
+                  <td width="73" height="31">&nbsp;</td>
+                  <td width="344"><a href="#"><font color="#FFFFFF">Forgot your Password ? </font></a></td>
+                  <td width="241"><input type="image" src="images/button.png" /></td>
+                </tr>
+                <tr>
+                  <td height="31" colspan="3" class="whiteHeading" align="center"> <input type="text" id="txtStatus" name="txtStatus" size="50" style="background:none; border:none; text-align:center;" readonly="readonly" class="whiteHeading"
+                   value="" />
+                  
+                  </td>
+                  </tr>
+                
+              </table></td>
+            
+            </tr>
+            </form>
+          </table>            </td>
+          <td width="185">&nbsp;</td>
+        </tr>
+        
+        <tr>
+          <td colspan="3" height="150">&nbsp;</td>
+          </tr>
+      </table></td>
+    </tr>
+    
+    </table>
+    
+    </center>
+</body>
+</html>
+

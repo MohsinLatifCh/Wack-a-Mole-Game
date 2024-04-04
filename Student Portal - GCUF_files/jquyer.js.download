@@ -1,0 +1,218 @@
+function ShowMe(sid){
+    var obj = document.getElementById(sid).style;
+    if(obj.display =='block'){
+        obj.display = 'none';
+    }else{
+        obj.display ='block';
+		}
+
+}
+
+
+var xmlHttp9;
+var xmlHttp8;
+var xmlHttp7;
+var xmlHttp6;
+var xmlHttp5;
+var xmlHttp4;
+var xmlHttp2;
+var xmlHttp3;
+var xmlHttp;
+rollID=0;
+
+setLayer="";
+setLayer1="";
+setLayer2="";
+setLayer3="";
+setLayer4="";
+setLayer5="";
+setLayer6="";
+var interVal=""
+var interVal1=""
+var interVal2=""
+
+
+function submitPass(){
+	var oldPass  = document.getElementById('oldPass').value;
+	var newPass  = document.getElementById('newPass').value;
+	var newPass1  = document.getElementById('newPass1').value;
+	
+	if(oldPass==""){
+	alert("Please enter old password..");
+		document.getElementById('oldPass').focus();
+	}else if(newPass==""){
+		alert("Please enter new password..");
+		document.getElementById('newPass').focus();
+	}else if(newPass1!=newPass){
+		alert("Your Password is not same..");
+			document.getElementById('newPass').value ="";
+			document.getElementById('newPass1').value ="";
+			document.getElementById('newPass').focus();
+	}else{
+		window.location="changePass.php?oldPass="+oldPass+"&newPass="+newPass;	
+			}
+	
+	}
+function classInfo(page){
+	var selObj = document.getElementById('sess_yr');
+	var selIndex = selObj.selectedIndex;
+	classVal=selObj.options[selIndex].value;
+	page=page+classVal;
+loadPage();
+xmlHttp3=GetXmlHttpObject();
+if (xmlHttp3==null){
+alert ("Your browser does not support AJAX!");
+return;
+}
+var url="modules/"+page;//this is the page where city will be selected
+url=url+"&sid="+Math.random();
+xmlHttp3.onreadystatechange=stateChanged3;
+xmlHttp3.open("GET",url,true);
+xmlHttp3.send(null);
+}
+
+function stateChanged3(){
+		if (xmlHttp3.readyState==4){
+				document.getElementById("CLASS_ID").innerHTML=xmlHttp3.responseText;
+				unloadPage();
+				stdInfo('std_list.php?');
+		//updateComboSize();
+		}
+}
+function deptInfo(page){
+//	alert(page);
+xmlHttp2=GetXmlHttpObject();
+if (xmlHttp2==null){
+alert ("Your browser does not support AJAX!");
+return;
+}
+loadPage();
+var url="modules/"+page;
+url=url+"&sid="+Math.random();
+xmlHttp2.onreadystatechange=stateChanged2;
+xmlHttp2.open("GET",url,true);
+xmlHttp2.send(null);
+}
+
+
+function deptInfo1(page){
+
+xmlHttp2=GetXmlHttpObject();
+if (xmlHttp2==null){
+alert ("Your browser does not support AJAX!");
+return;
+}
+var url=page;
+url=url+"&sid="+Math.random();
+xmlHttp2.onreadystatechange=stateChanged2;
+loadPage();
+xmlHttp2.open("GET","modules/attendance_awardList_std_Body.php?"+url,true);
+xmlHttp2.setRequestHeader("Content-type", "text/xml");
+xmlHttp2.setRequestHeader("Content-length", url.length);
+xmlHttp2.setRequestHeader("Connection", "close");
+xmlHttp2.send(null);
+
+
+
+}
+
+function stateChanged2(){
+		if (xmlHttp2.readyState==4){
+				document.getElementById("detail").innerHTML=xmlHttp2.responseText;
+				unloadPage();
+		//updateComboSize();
+		}
+}
+ 
+function GetXmlHttpObject(){
+		var xmlHttp=null;
+		try{
+		// Firefox, Opera 8.0+, Safari
+		xmlHttp=new XMLHttpRequest();
+		}catch (e){
+		// Internet Explorer
+		try{
+			xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+					}catch (e){
+			xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		}
+return xmlHttp;
+}
+
+function setVal(id,str)	{
+ document.getElementById(id).value=str;	
+}
+
+function updateLayer(page, layer){
+	//alert("Qaddus...");
+setLayer=layer;
+xmlHttp1=GetXmlHttpObject();
+var url="modules/"+page;//this is the page where city will be selected
+url=url+"?sid="+Math.random();
+loadPage();
+//alert("url = "+url);
+xmlHttp1.onreadystatechange=stateChanged1;
+xmlHttp1.open("GET",url,true);
+xmlHttp1.send(null);
+}
+
+function updateLayer2(page, layer){
+//	alert(page);
+loadPage();
+setLayer=layer;
+xmlHttp3=GetXmlHttpObject();
+//var url="modules/"+page;//this is the page where city will be selected
+url=url+"&sid="+Math.random();
+//alert("url = "+url);
+xmlHttp3.onreadystatechange=stateChanged3;
+xmlHttp3.open("GET",url,true);
+xmlHttp3.send(null);
+}
+
+function updateLayer3(page, layer){
+//	alert(page);
+setLayer=layer;
+xmlHttp3=GetXmlHttpObject();
+var url="modules/"+page;//this is the page where city will be selected
+url=url+"&sid="+Math.random();
+//alert("url = "+url);
+loadPage();
+xmlHttp3.onreadystatechange=stateChanged3;
+xmlHttp3.open("GET",url,true);
+xmlHttp3.send(null);
+}
+
+function stateChanged1(){	
+		if (xmlHttp1.readyState==4){			
+				document.getElementById(setLayer).innerHTML=xmlHttp1.responseText;
+				unloadPage();
+				if(setLayer=="detail"){
+					//alert("dd");
+					updateLayer("newcomp.php","newCompLy");
+				}else if(setLayer=="newCompLy"){
+					updateLayer("itStaffLayer.php","itReviewCompLy");
+				}else if(setLayer=="itReviewCompLy"){
+					updateLayer("finalComp.php","resCompLy");
+				}
+		}
+}
+
+function stateChanged3(){	
+		if (xmlHttp3.readyState==4){
+			document.getElementById(setLayer).innerHTML=xmlHttp3.responseText;
+			unloadPage();
+		}
+}
+
+
+function loadPage(){
+	
+	addMainPage('loader.php',400,210,'Loading Page.. ');
+	}
+
+
+function unloadPage(){
+	
+	parent.mainWindow.hide();
+	}
